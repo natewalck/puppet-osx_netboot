@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NetBoot</key>
+    <dict/>
+    <key>allow</key>
+    <array/>
+    <key>bootp_enabled</key>
+    <true/>
+    <key>deny</key>
+    <array/>
+    <key>detect_other_dhcp_server</key>
+    <true/>
+    <key>dhcp_enabled</key>
+    <false/>
+    <key>netboot_enabled</key>
+    <array>
+          <string>en0</string>
+    </array>
+    <key>old_netboot_enabled</key>
+    <false/>
+    <key>relay_enabled</key>
+    <false/>
+    <key>relay_ip_list</key>
+    <array/>
+    <key>startTime</key>
+    <string>2012-05-18 14:08:56 -0400</string>
+</dict>
+</plist>
