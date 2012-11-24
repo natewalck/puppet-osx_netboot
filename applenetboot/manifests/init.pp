@@ -2,6 +2,6 @@
 class applenetboot
 inherits applenetboot::params{
 
-  class { "applenetboot::install" }
+  class { "applenetboot::install": }
 
 }
