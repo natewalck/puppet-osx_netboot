@@ -25,10 +25,10 @@ inherits applenetboot::params {
     mode    => '0644',
     owner   => '0',
     content => template('applenetboot/exports.erb'),
-    notify  => Service['bootps'],
+    notify  => Service['com.apple.bootpd'],
   }
 
-  service { 'bootpst':
+  service { 'com.apple.bootpd':
     enable  => true,
     ensure  => running,
     require => File['/private/etc/bootpd.plist'],
