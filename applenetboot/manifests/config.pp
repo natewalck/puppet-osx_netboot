@@ -3,6 +3,11 @@
 class applenetboot::config ( $interface = $applenetboot::params::interface)
 inherits applenetboot::params {
 
+  Property_list_key {
+    notify => Service['com.apple.bootpd'],
+    before => File['/private/etc/bootpd.plist'],
+  }
+
   file { '/System/Library/LaunchDaemons/tftp.plist':
     ensure  => 'file',
     source  => 'puppet:///modules/applenetboot/tftp.plist',
@@ -16,7 +21,49 @@ inherits applenetboot::params {
     group   => '0',
     mode    => '0644',
     owner   => '0',
-    content => template('applenetboot/bootpd.plist.erb')
+  }
+
+  ## bootpd.plist keys ##
+  #
+  #  Note: There are others that can be exposed; these are the basics
+  property_list_key { 'set_netboot_interfaces':
+    ensure     => present,
+    path       => '/private/etc/bootpd.plist',
+    key        => 'netboot_enabled',
+    value      => [$interface],
+    value_type => 'array',
+  }
+
+  property_list_key { 'bootp_enabled':
+    ensure     => present,
+    path       => '/private/etc/bootpd.plist',
+    key        => 'bootp_enabled',
+    value      => true,
+    value_type => 'boolean',
+  }
+
+  property_list_key { 'dhcp_enabled':
+    ensure     => present,
+    path       => '/private/etc/bootpd.plist',
+    key        => 'dhcp_enabled',
+    value      => false,
+    value_type => 'boolean',
+  }
+
+  property_list_key { 'old_netboot_enabled':
+    ensure     => present,
+    path       => '/private/etc/bootpd.plist',
+    key        => 'old_netboot_enabled',
+    value      => false,
+    value_type => 'boolean',
+  }
+
+  property_list_key { 'relay_enabled':
+    ensure     => present,
+    path       => '/private/etc/bootpd.plist',
+    key        => 'relay_enabled',
+    value      => false,
+    value_type => 'boolean',
   }
 
   file { '/private/etc/exports':
