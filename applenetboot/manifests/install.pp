@@ -38,7 +38,9 @@ inherits applenetboot::params{
   file { '/private/tftpboot/NetBoot/NetBootSP0':
     ensure  => 'link',
     target  => "${root_dir}/NetBootSP0",
-    require => File['/private/tftpboot/NetBoot'],
+    require => [ File['/private/tftpboot/NetBoot'],
+                      File["${root_dir}/NetBootSP0"]
+                    ]
   }
 
   file { "${root_dir}/.clients":

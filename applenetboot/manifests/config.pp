@@ -29,8 +29,16 @@ inherits applenetboot::params {
   }
 
   service { 'com.apple.bootpd':
-    enable  => true,
     ensure  => running,
-    require => File['/private/etc/bootpd.plist'],
+    enable  => true,
+    require => [ File['/private/etc/bootpd.plist'],
+                      Service['com.apple.tftp']
+                    ]
+  }
+
+  service { 'com.apple.tftpd':
+    ensure  => running,
+    enable  => true,
+    require => File['/System/Library/LaunchDaemons/tftp.plist'],
   }
 }
