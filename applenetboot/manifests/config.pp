@@ -33,3 +33,4 @@ inherits applenetboot::params {
 #    enable  => true,
 #    require => [File['/private/etc/bootpd.plist']],
 #  }
+}
