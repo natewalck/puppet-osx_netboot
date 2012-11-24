@@ -1,5 +1,6 @@
 # /etc/puppet/modules/manifests/params.pp
-class macnetboot::params {
+class applenetboot::params {
   # root directory of the netboot sets
   $root_dir = "/Library/NetBoot"
+  $interface = "en0"
 }
