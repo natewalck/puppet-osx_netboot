@@ -44,12 +44,12 @@ inherits applenetboot::params{
   file { "${root_dir}/.clients":
     ensure  => 'link',
     target  => 'NetBootClients0',
-    require => File[$root_dir],
+    require => File["${root_dir}/NetBootClients0"],
   }
 
   file { "${root_dir}/.sharepoint":
     ensure  => 'link',
     target  => 'NetBootSP0',
-    require => File[$root_dir],
+    require => File["${root_dir}/NetBootSP0"],
   }
 }
