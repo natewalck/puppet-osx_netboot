@@ -34,7 +34,7 @@ inherits applenetboot::params {
     ensure  => running,
     enable  => true,
     require => [ File['/private/etc/bootpd.plist'],
-                      Service['com.apple.tftp']
+                      Service['com.apple.tftpd']
                     ]
   }
 
