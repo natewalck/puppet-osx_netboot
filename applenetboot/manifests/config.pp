@@ -1,8 +1,7 @@
 # /etc/puppet/modules/applenetboot/manifests/config.pp
 
 class applenetboot::config ( $interface = $applenetboot::params::interface)
-inherits applenetboot::params {
-
+{
   require applenetboot::install
 
   file { '/System/Library/LaunchDaemons/tftp.plist':

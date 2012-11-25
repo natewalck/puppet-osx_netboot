@@ -1,7 +1,7 @@
 # /etc/puppet/modules/applenetboot/manifests/install.pp
 
 class applenetboot::install( $root_dir = $applenetboot::params::root_dir)
-inherits applenetboot::params{
+{
 
   file { $root_dir:
     ensure => 'directory',
