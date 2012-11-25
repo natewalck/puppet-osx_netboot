@@ -8,7 +8,6 @@ inherits applenetboot::params{
     group  => '80',
     mode   => '0775',
     owner  => '0',
-    before => Class['applenetboot::config'],
   }
 
   file { "${root_dir}/NetBootClients0":
@@ -32,7 +31,6 @@ inherits applenetboot::params{
     group  => '80',
     mode   => '0755',
     owner  => '0',
-    before => Class['applenetboot::config'],
   }
 
   file { '/private/tftpboot/NetBoot/NetBootSP0':

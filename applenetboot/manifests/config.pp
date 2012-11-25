@@ -3,6 +3,8 @@
 class applenetboot::config ( $interface = $applenetboot::params::interface)
 inherits applenetboot::params {
 
+  require applenetboot::install
+
   file { '/System/Library/LaunchDaemons/tftp.plist':
     ensure  => 'file',
     source  => 'puppet:///modules/applenetboot/tftp.plist',
