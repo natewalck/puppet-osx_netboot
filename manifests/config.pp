@@ -18,6 +18,12 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
     unless  => 'defaults read /etc/bootpd bootp_enabled | grep -qx 1',
   }
 
+  exec { 'detect_other_dhcp_server':
+    path    => '/bin:/usr/bin',
+    command => 'defaults write /etc/bootpd detect_other_dhcp_server -bool true',
+    unless  => 'defaults read /etc/bootpd detect_other_dhcp_server | grep -qx 1',
+  }
+
   exec { 'dhcp_enabled_false':
     path    => '/bin:/usr/bin',
     command => 'defaults write /etc/bootpd dhcp_enabled -bool false',
@@ -45,6 +51,7 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
     ensure  => running,
     enable  => true,
     require => [ Exec['bootp_enabled'],
+                      Exec['detect_other_dhcp_server'],
                       Exec['dhcp_enabled_false'],
                       Exec['netboot_enabled'],
                       Service['com.apple.tftpd']
