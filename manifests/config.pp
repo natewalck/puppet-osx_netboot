@@ -27,7 +27,7 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
   exec { 'dhcp_enabled_false':
     path    => '/bin:/usr/bin',
     command => 'defaults write /etc/bootpd dhcp_enabled -bool false',
-    unless  => 'defaults read /etc/bootpd dchp_enabled | grep -qx 0',
+    unless  => 'defaults read /etc/bootpd dhcp_enabled | grep -qx 0',
   }
 
   exec { 'netboot_enabled':
