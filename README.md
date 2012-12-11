@@ -1,4 +1,4 @@
-puppet-applenetboot
+puppet-osx_netboot
 ===================
 A module for configuring netboot on any Mac OS X 10.6/10.7 machine. (10.8 untested at this moment)
 

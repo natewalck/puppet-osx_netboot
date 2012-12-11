@@ -1,6 +1,6 @@
-# /etc/puppet/modules/applenetboot/manifests/install.pp
+# /etc/puppet/modules/osx_netboot/manifests/install.pp
 
-class applenetboot::install( $root_dir = $applenetboot::params::root_dir)
+class osx_netboot::install( $root_dir = $osx_netboot::params::root_dir)
 {
 
   file { $root_dir:

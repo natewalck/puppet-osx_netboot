@@ -1,12 +1,12 @@
-# /etc/puppet/modules/applenetboot/manifests/config.pp
+# /etc/puppet/modules/osx_netboot/manifests/config.pp
 
-class applenetboot::config ( $interface = $applenetboot::params::interface)
+class osx_netboot::config ( $interface = $osx_netboot::params::interface)
 {
-  require applenetboot::install
+  require osx_netboot::install
 
   file { '/System/Library/LaunchDaemons/tftp.plist':
     ensure  => 'file',
-    source  => 'puppet:///modules/applenetboot/tftp.plist',
+    source  => 'puppet:///modules/osx_netboot/tftp.plist',
     group   => '0',
     mode    => '0644',
     owner   => '0',
@@ -57,7 +57,7 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
     group   => '0',
     mode    => '0644',
     owner   => '0',
-    content => template('applenetboot/exports.erb'),
+    content => template('osx_netboot/exports.erb'),
     notify  => Service['com.apple.bootpd'],
   }
 

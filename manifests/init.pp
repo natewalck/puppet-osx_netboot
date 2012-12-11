@@ -1,8 +1,8 @@
-# /etc/puppet/modules/applenetboot/manifests/init.pp
-class applenetboot {
+# /etc/puppet/modules/osx_netboot/manifests/init.pp
+class osx_netboot {
 
-  include applenetboot::params
-  include applenetboot::install
-  include applenetboot::config
+  include osx_netboot::params
+  include osx_netboot::install
+  include osx_netboot::config
 
 }
