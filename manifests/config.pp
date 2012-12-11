@@ -12,38 +12,45 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
     owner   => '0',
   }
 
-  exec { 'bootp_enabled':
-    path    => '/bin:/usr/bin',
-    command => 'defaults write /etc/bootpd bootp_enabled -bool true',
-    unless  => 'defaults read /etc/bootpd bootp_enabled | grep -qx 1',
+  property_list_key { 'bootp_enabled':
+    ensure     => present,
+    path       => '/etc/bootpd',
+    key        => 'bootp_enabled',
+    value      => true,
+    value_type => 'boolean',
   }
 
-  exec { 'detect_other_dhcp_server':
-    path    => '/bin:/usr/bin',
-    command => 'defaults write /etc/bootpd detect_other_dhcp_server -bool true',
-    unless  => 'defaults read /etc/bootpd detect_other_dhcp_server | grep -qx 1',
+  property_list_key { 'detect_other_dhcp_server':
+    ensure     => present,
+    path       => '/etc/bootpd',
+    key        => 'detect_other_dhcp_server',
+    value      => true,
+    value_type => 'boolean',
   }
 
-  exec { 'dhcp_enabled_false':
-    path    => '/bin:/usr/bin',
-    command => 'defaults write /etc/bootpd dhcp_enabled -bool false',
-    unless  => 'defaults read /etc/bootpd dhcp_enabled | grep -qx 0',
+  property_list_key { 'dhcp_enabled_false':
+    ensure     => present,
+    path       => '/etc/bootpd',
+    key        => 'dhcp_enabled',
+    value      => false,
+    value_type => 'boolean',
   }
 
-  exec { 'netboot_enabled':
-    path    => '/bin:/usr/bin',
-    command => "defaults write /etc/bootpd netboot_enabled\
-                                          -array-add ${interface}",
-    unless  => "defaults read /etc/bootpd netboot_enabled\
-                                          | grep -q ${interface}",
+  property_list_key { 'netboot_enabled':
+    ensure     => present,
+    path       => '/etc/bootpd',
+    key        => 'netboot_enabled',
+    value      => ["${interface}"],
+    value_type => 'array',
   }
 
-  exec { 'startTime':
-    path    => '/bin:/usr/bin',
-    command => 'defaults write /etc/bootpd startTime\
-                                          "$(date "+%Y-%m-%d %H:%M:%S %z")"',
-    unless  => 'defaults read /etc/bootpd bootp_enabled | grep -qx 1',
-  }
+  # Possibly not needed?
+  #  exec { 'startTime':
+  #    path    => '/bin:/usr/bin',
+  #    command => 'defaults write /etc/bootpd startTime\
+  #                                          "$(date "+%Y-%m-%d %H:%M:%S %z")"',
+  #    unless  => 'defaults read /etc/bootpd bootp_enabled | grep -qx 1',
+  #  }
 
   file { '/private/etc/exports':
     ensure  => present,
@@ -57,11 +64,10 @@ class applenetboot::config ( $interface = $applenetboot::params::interface)
   service { 'com.apple.bootpd':
     ensure  => running,
     enable  => true,
-    require => [ Exec['bootp_enabled'],
-                      Exec['detect_other_dhcp_server'],
-                      Exec['dhcp_enabled_false'],
-                      Exec['netboot_enabled'],
-                      Exec['startTime'],
+    require => [ Property_list_key['bootp_enabled'],
+                      Property_list_key['detect_other_dhcp_server'],
+                      Property_list_key['dhcp_enabled_false'],
+                      Property_list_key['netboot_enabled'],
                       Service['com.apple.tftpd']
                     ]
   }

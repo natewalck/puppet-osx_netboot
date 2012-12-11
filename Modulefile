@@ -1,0 +1,6 @@
+name    'nwalck-osx_netboot'
+version '0.1.0'
+license 'Apache License, Version 2.0'
+summary 'NetBoot Service Module for OS X'
+description 'Module for setting up a NetBoot service OS X Client or Server' 
+dependency 'glarizza/osx_management', '0.x'
