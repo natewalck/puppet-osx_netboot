@@ -14,7 +14,7 @@ class osx_netboot::config ( $interface = $osx_netboot::params::interface)
 
   property_list_key { 'bootp_enabled':
     ensure     => present,
-    path       => '/etc/bootpd',
+    path       => '/etc/bootpd.plist',
     key        => 'bootp_enabled',
     value      => true,
     value_type => 'boolean',
@@ -22,7 +22,7 @@ class osx_netboot::config ( $interface = $osx_netboot::params::interface)
 
   property_list_key { 'detect_other_dhcp_server':
     ensure     => present,
-    path       => '/etc/bootpd',
+    path       => '/etc/bootpd.plist',
     key        => 'detect_other_dhcp_server',
     value      => true,
     value_type => 'boolean',
@@ -30,7 +30,7 @@ class osx_netboot::config ( $interface = $osx_netboot::params::interface)
 
   property_list_key { 'dhcp_enabled_false':
     ensure     => present,
-    path       => '/etc/bootpd',
+    path       => '/etc/bootpd.plist',
     key        => 'dhcp_enabled',
     value      => false,
     value_type => 'boolean',
@@ -38,7 +38,7 @@ class osx_netboot::config ( $interface = $osx_netboot::params::interface)
 
   property_list_key { 'netboot_enabled':
     ensure     => present,
-    path       => '/etc/bootpd',
+    path       => '/etc/bootpd.plist',
     key        => 'netboot_enabled',
     value      => ["${interface}"],
     value_type => 'array',
