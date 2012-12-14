@@ -1,5 +1,5 @@
 name    'nwalck-osx_netboot'
-version '0.1.0'
+version '0.1.1'
 license 'Apache License, Version 2.0'
 summary 'NetBoot Service Module for OS X'
 description 'Module for setting up a NetBoot service on OS X Client or Server' 
