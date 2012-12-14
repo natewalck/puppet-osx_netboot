@@ -43,14 +43,6 @@ class osx_netboot::config{
     value_type => 'array',
   }
 
-  # Possibly not needed?
-  #  exec { 'startTime':
-  #    path    => '/bin:/usr/bin',
-  #    command => 'defaults write /etc/bootpd startTime\
-  #                                          "$(date "+%Y-%m-%d %H:%M:%S %z")"',
-  #    unless  => 'defaults read /etc/bootpd bootp_enabled | grep -qx 1',
-  #  }
-
   file { '/private/etc/exports':
     ensure  => present,
     group   => '0',
