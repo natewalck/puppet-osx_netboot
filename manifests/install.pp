@@ -1,7 +1,7 @@
 # /etc/puppet/modules/osx_netboot/manifests/install.pp
 
-class osx_netboot::install( $root_dir = $osx_netboot::params::root_dir)
-{
+class osx_netboot::install {
+  $root_dir = $osx_netboot::root_dir
 
   file { $root_dir:
     ensure => 'directory',

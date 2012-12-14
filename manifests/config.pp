@@ -1,8 +1,7 @@
 # /etc/puppet/modules/osx_netboot/manifests/config.pp
 
-class osx_netboot::config ( $interface = $osx_netboot::params::interface)
-{
-  require osx_netboot::install
+class osx_netboot::config{
+  $interface = $osx_netboot::interface
 
   file { '/System/Library/LaunchDaemons/tftp.plist':
     ensure  => 'file',
@@ -59,22 +58,5 @@ class osx_netboot::config ( $interface = $osx_netboot::params::interface)
     owner   => '0',
     content => template('osx_netboot/exports.erb'),
     notify  => Service['com.apple.bootpd'],
-  }
-
-  service { 'com.apple.bootpd':
-    ensure  => running,
-    enable  => true,
-    require => [ Property_list_key['bootp_enabled'],
-                      Property_list_key['detect_other_dhcp_server'],
-                      Property_list_key['dhcp_enabled_false'],
-                      Property_list_key['netboot_enabled'],
-                      Service['com.apple.tftpd']
-                    ]
-  }
-
-  service { 'com.apple.tftpd':
-    ensure  => running,
-    enable  => true,
-    require => File['/System/Library/LaunchDaemons/tftp.plist'],
   }
 }
